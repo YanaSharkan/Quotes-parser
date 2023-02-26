@@ -2,7 +2,7 @@ from django.core.management.base import BaseCommand
 
 from faker import Faker
 
-from ...models import Author, Quote, Book
+from ...models import Author, Book, Quote
 
 
 class Command(BaseCommand):

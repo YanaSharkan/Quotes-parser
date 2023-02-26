@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block title %}Main Page{% endblock %}
+
+{% block content %}
+<div><a href="{% url 'quotes:authors' %}">List of authors</a></div>
+<div><a href="{% url 'quotes:quotes' %}">List of quotes</a></div>
+<div><a href="{% url 'quotes:books' %}">List of books</a></div>
+
+{% endblock %}

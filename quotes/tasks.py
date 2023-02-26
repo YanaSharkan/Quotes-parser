@@ -1,11 +1,15 @@
-from django.core.mail import send_mail
+from bs4 import BeautifulSoup
+
 from celery.schedules import crontab
 
-from bs4 import BeautifulSoup
+from core.celery import app
+
+from django.core.mail import send_mail
+
 import requests
 
-from core.celery import app
-from .models import Quote, Author
+
+from .models import Author, Quote
 
 
 @app.task
