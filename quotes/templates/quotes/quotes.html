@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+
+{% block title %}Authors list{% endblock %}
+
+{% block content %}
+<a href="{% url 'quotes:index' %}">Return to main page</a>
+<table border="1" cellspacing="1">
+    <thead>
+        <tr>
+            <th>Quote</th>
+            <th>Author</th>
+            <th>Books Count</th>
+            <th>Top Books</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for entry in entries_list %}
+        <tr>
+            <td>{{ entry.body }}</td>
+            <td>{{ entry.author }}</td>
+            <td>{{ entry.author__book__count }}</td>
+            <td>
+                {% for book in entry.author.book_set.all|slice:"0:5" %}
+                    <div>{{ book.name }}</div>
+                {% endfor %}
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br>
+<div class="pagination">
+    <span class="step-links">
+        {% if page_obj.has_previous %}
+            <a href="?page=1">&laquo; first</a>
+            <a href="?page={{ page_obj.previous_page_number }}">previous</a>
+        {% endif %}
+
+        <span class="current">
+            Page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}.
+        </span>
+
+        {% if page_obj.has_next %}
+            <a href="?page={{ page_obj.next_page_number }}">next</a>
+            <a href="?page={{ page_obj.paginator.num_pages }}">last &raquo;</a>
+        {% endif %}
+    </span>
+</div>
+{% endblock %}

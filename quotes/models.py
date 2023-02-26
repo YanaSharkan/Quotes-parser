@@ -1,6 +1,23 @@
 from django.db import models
 
 
+class Quote(models.Model):
+    body = models.TextField()
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+
+    def __str__(self):
+        return f'{self.body}'
+
+
+class Book(models.Model):
+    name = models.CharField(max_length=200)
+    author = models.ForeignKey('Author', on_delete=models.CASCADE)
+    pages = models.IntegerField()
+
+    def __str__(self):
+        return f'{self.name}'
+
+
 class Author(models.Model):
     full_name = models.CharField(max_length=200)
     about = models.TextField()
@@ -9,11 +26,3 @@ class Author(models.Model):
 
     def __str__(self):
         return f'{self.full_name}'
-
-
-class Quote(models.Model):
-    body = models.TextField()
-    author = models.ForeignKey(Author, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f'{self.body}'
