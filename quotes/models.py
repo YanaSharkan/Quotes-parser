@@ -17,3 +17,9 @@ class Quote(models.Model):
 
     def __str__(self):
         return f'{self.body}'
+
+
+class Book(models.Model):
+    name = models.CharField(max_length=200)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    pages = models.IntegerField()
